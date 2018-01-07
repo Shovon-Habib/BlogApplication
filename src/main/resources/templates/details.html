@@ -1,0 +1,89 @@
+<html xmlns:th="http://thymeleaf.org">
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Details</title>
+<script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/webjars/bootstrap/3.3.6/css/bootstrap.min.css"/>
+
+<script>
+
+
+</script>
+
+
+</head>
+<body class="container">
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="#">
+		        <span th:text="${ApplicationName}"></span>
+		      </a>
+		    </div>
+	    	<div class="collapse navbar-collapse">
+			    <ul class="nav navbar-nav">
+			        <li><a th:href="@{/}">Home</a></li>
+		        </ul>
+		        
+		        <ul class="nav navbar-nav navbar-right">
+	                <li><a th:href="@{../registration}"><span class="glyphicon-glyphicon-user"></span>Register</a></li>
+	                <li><a th:href="@{../loginpage}"><span class="glyphicon-glyphicon-log-in"></span>Login</a></li>
+            	</ul>
+	        </div>
+	  </div>
+	</nav>
+	
+	<div>
+		<label class="label label-primary">Title</label><br>
+		<textarea class="form-control input-lg" rows="2" cols="100" id="article" th:text="${Article.getArticleTitle()}" readonly></textarea>
+		<br>
+		<label class="label label-primary">Category</label>
+		<label class="label label-default" th:text="${Article.getArticleCategory()}"></label>
+		<br>
+		<label class="label label-primary">Author</label>
+		<label class="label label-default" th:text="${Article.getUser().getName()}">Author</label>
+		<br><br>
+		<textarea class="form-control input-lg" rows="15" cols="100" id="article" th:text="${Article.getArticleBody()}" readonly></textarea>
+	</div>
+
+<!-- 	COMMNET SECTION -->
+	<div class="row" style="margin-top:25px">
+		<div class="col-lg-12">
+			<div class="jumbotron">
+				<h4>If you have anything to say..</h4>
+				<form class="form-horizontal" th:object="${Comment}" th:action="@{/save_comment}" method="post">
+					<input type="hidden" th:field="*{id}"/>
+					<input type="hidden" th:field="*{article}" th:value="${Article}"/>
+					<div class="form-group">
+						<input type="text" class="form-control" name="userName" th:field="*{userName}">
+					</div>
+					<div class="form-group">
+						<textarea class="form-control input-lg" rows="5" name="commentBody" th:field="*{commentBody}"></textarea>
+					</div>
+					<div class="form-group">
+						<input type="submit" value="Comment" class="btn btn-primary"/>
+					</div>
+				</form>
+			</div>
+		</div>	
+	</div>
+	
+	
+	<!-- Show Previous Comments -->
+	<div class="row" style="margin-top:25px">
+		<div class="col-lg-12">
+		<h4>Previous Comments....</h4>
+		<hr/>
+			<div class="col-lg-12" th:each="comment:${PreviousComments}">
+				<strong><p th:text="${comment.getUserName()}"></p></strong>
+				<p th:text="${comment.getCommentBody()}"></p>
+				<p th:text="${comment.getCommentTime()}"></p>
+				<hr/>
+			</div>
+		</div>
+		
+	</div>
+	
+</body>
+</html>

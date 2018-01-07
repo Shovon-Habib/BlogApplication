@@ -1,0 +1,65 @@
+<html xmlns:th="http://thymeleaf.org">
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>New Registration</title>
+<script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/webjars/bootstrap/3.3.6/css/bootstrap.min.css"/>
+</head>
+<body class="container">
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">
+	        <span th:text="${ApplicationName}"></span>
+	      </a>
+	    </div>
+    	<div class="collapse navbar-collapse">
+		    <ul class="nav navbar-nav">
+		        <li><a th:href="@{/}">Home</a></li>
+	        </ul>
+	        
+			<ul class="nav navbar-nav navbar-right">
+                <li><a th:href="@{registration}"><span class="glyphicon-glyphicon-user"></span>Register</a></li>
+                <li><a th:href="@{loginpage}"><span class="glyphicon-glyphicon-log-in"></span>Login</a></li>
+            </ul>
+       </div>
+  </div>
+</nav>
+
+<div class="row">
+	<div class="col-lg-3 col-lg-offset-5"><p th:text="${RegistrationMessage}"></p></div>
+</div>
+
+<div class="row">
+	<div class="col-lg-6 col-lg-offset-3">
+		<div class="jumbotron">
+			<p><form:errors path="*{User}"/></p>
+			<form th:object="${User}" th:action="@{/register}" method="post">
+				<input type="hidden" th:field="*{authorId}"/>
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input type="email" class="form-control" id="email" th:field="*{email}">
+					<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
+				</div>
+				<div class="form-group">
+					<label for="name">Name</label>
+					<input type="text" class="form-control" id="name" th:field="*{name}">
+					<div th:errors="*{name}">Name Error</div>
+				</div>
+				<div class="form-group">
+					<label for="pass">Password</label>
+					<input type="password" class="form-control" id="pass" th:field="*{password}">
+					<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Register" class="btn btn-success btn-lg" 
+										style="margin-left:23%; margin-top:10px;width:250px;">
+				</div>
+			</form>
+		</div>	
+	</div>
+</div>
+
+</body>
+</html>

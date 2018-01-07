@@ -1,0 +1,61 @@
+<html xmlns:th="http://thymeleaf.org">
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Edit Article</title>
+<script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/webjars/bootstrap/3.3.6/css/bootstrap.min.css"/>
+</head>
+<body class="container">
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="#">
+		        <span th:text="${ApplicationName}"></span>
+		      </a>
+		    </div>
+	    	<div class="collapse navbar-collapse">
+			    <ul class="nav navbar-nav">
+			        <!-- <li><a th:href="@{/}">Home</a></li> -->
+		        </ul>
+		        
+				<ul class="nav navbar-nav navbar-right">
+					<li><a th:href="@{/account}" th:text="${CurrentUser.getName()}"><span class="glyphicon-glyphicon-log-in"></span>Account</a></li>
+	                <li><a th:href="@{../logout}"><span class="glyphicon-glyphicon-log-in"></span>logout</a></li>
+	            </ul>
+	       </div>
+	  </div>
+	</nav>
+	  
+	  <div class="row">
+	  	<div class="col-lg-12">
+	  	 	<div class="jumbotron">
+		  		<form class="" th:object="${Article}" th:action="@{/edit}" method="post">
+					<input type="hidden" th:field="*{articleId}"/>
+					<div class="form-group">
+						<label for="category"><h4>Article Category</h4></label>
+						<select id="category" th:field="*{articleCategory}">
+							  <option value="science & technology">Science & Technology</option>
+							  <option value="computer">Computer</option>
+							  <option value="pylosophy">Pylosophy</option>
+						</select>
+					</div>
+					
+					<div class="form-group">
+						<label for="title"><h4>Title</h4></label>
+						<textarea class="form-control" rows="3" id="title" th:field="*{articleTitle}" th:text="${Article.getArticleTitle()}"></textarea>
+					</div>
+					
+					<div class="form-group">
+						<textarea class="form-control" rows="30" id="article" th:field="*{articleBody}" th:text="${Article.getArticleBody()}"></textarea>		
+					</div>
+					
+					<div class="form-group">
+						<input type="submit" value="Edit" class="btn btn-success btn-block"/>
+					</div>
+				</form>
+			</div>
+	  	</div>	
+	</div>
+</body>
+</html>

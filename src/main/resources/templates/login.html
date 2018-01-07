@@ -1,0 +1,58 @@
+<html xmlns:th="http://thymeleaf.org">
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Login</title>
+<script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/webjars/bootstrap/3.3.6/css/bootstrap.min.css"/>
+</head>
+<body class="container">
+<div>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="#">
+		        <span th:text="${ApplicationName}"></span>
+		      </a>
+		    </div>
+	    	<div class="collapse navbar-collapse">
+			    <ul class="nav navbar-nav">
+			        <li><a th:href="@{/}">Home</a></li>
+		        </ul>
+		        
+				<ul class="nav navbar-nav navbar-right">
+	                <li><a th:href="@{registration}"><span class="glyphicon-glyphicon-user"></span>Register</a></li>
+	                <li><a th:href="@{loginpage}"><span class="glyphicon-glyphicon-log-in"></span>Login</a></li>
+	            </ul>
+	       </div>
+	  </div>
+	</nav>
+</div>
+	<div class="row">
+		<div class="col-lg-4 col-lg-offset-4"><span th:text="${LoginMessage}"></span></div>
+	</div>
+	<div class="row">
+		<div class="col-lg-5 col-lg-offset-4">
+			<div class="jumbotron">
+				<form action="login" method="post">
+				  <div class="form-group">
+				    <label for="email">Email address:</label>
+				    <input type="email" class="form-control" id="email" name="email">
+				  </div>
+				  <div class="form-group">
+				    <label for="pwd">Password:</label>
+				    <input type="password" class="form-control" id="pwd" name="password">
+				  </div>
+	  			  <div class="form-group">
+				    <input type="submit" class="btn btn-primary btn-block" value="Login">
+				  </div>
+	  			
+			</form>
+			</div>
+			
+		</div>	
+	</div>
+
+
+</body>
+</html>
